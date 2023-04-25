@@ -1,4 +1,4 @@
-@import "src/colors.scss";
+@import 'src/colors.scss';
 
 .SlideCardList {
   position: relative;
@@ -36,7 +36,7 @@
         width: 16px;
         height: 16px;
         min-width: 0;
-        color: $primary;
+        accent-color: $primary;
       }
     }
     &__description {
@@ -47,7 +47,7 @@
       color: white;
       border-radius: 8px;
       display: flex;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       h3 {
         width: 45%;
         border-right: 1px solid #4314ff;
