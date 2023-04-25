@@ -1,4 +1,4 @@
-@import "src/colors.scss";
+@import 'src/colors.scss';
 
 .EventCard {
   position: relative;
@@ -14,8 +14,8 @@
       overflow: hidden;
     }
     .EventCard__descriptionContainer {
-      padding: 0;
-      padding-top: 12px;
+      // padding: 0;
+      padding: 12px;
       font-size: 12px;
     }
     .EventCard__month {
@@ -26,6 +26,7 @@
       font-size: 8px;
       width: 75px;
       height: 21px;
+      padding: 3px;
     }
   }
   background: #ffffff;
@@ -66,6 +67,9 @@
   &__title {
     font-size: 16px;
     text-transform: capitalize;
+  }
+  &__description {
+    margin: 4px 0px;
   }
   &__month {
     text-transform: uppercase;

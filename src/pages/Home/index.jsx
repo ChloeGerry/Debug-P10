@@ -13,7 +13,15 @@ import Modal from '../../containers/Modal';
 import { useData } from '../../contexts/DataContext';
 
 const Page = () => {
-  const { last } = useData();
+  const { data } = useData();
+  let lastEvent = null;
+
+  data.events.forEach((dataEvent) => {
+    if (dataEvent.id === data.events.length) {
+      lastEvent = dataEvent;
+    }
+  });
+
   return (
     <>
       <header>
@@ -29,26 +37,32 @@ const Page = () => {
           <div className="ListContainer">
             <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
               <h3>Soirée d’entreprise</h3>
-              Une soirée d’entreprise vous permet de réunir vos équipes pour un
-              moment convivial afin de valoriser votre société en projetant une
-              image dynamique. Nous vous proposons d’organiser pour vous vos
-              diners et soirée d’entreprise
+              <p>
+                Une soirée d’entreprise vous permet de réunir vos équipes pour
+                un moment convivial. Cela valorise votre société en projetant
+                une image dynamique. Nous vous proposons d’organiser, pour vous,
+                vos diners et soirées d’entreprise.
+              </p>
             </ServiceCard>
             <ServiceCard imageSrc="/images/hall-expo.png">
               <h3>Conférences</h3>
-              77 events vous propose d’organiser votre évènement, quelle que
-              soit sa taille, en s’adaptant à votre demande et à vos demandes.
-              En tant que spécialistes de l’évènementiel, nous saurons trouver
-              le lieu parfait ainsi que des solutions inédites pour capter votre
-              audience et faire de cet évènement un succès
+              <p>
+                77 events vous propose d’organiser votre événement, quelle que
+                soit sa taille, en s’adaptant à vos demandes. En tant que
+                spécialistes de l’événementiel, nous saurons trouver le lieu
+                parfait ainsi que des solutions inédites pour capter votre
+                audience et faire de cet événement un succès.
+              </p>
             </ServiceCard>
             <ServiceCard imageSrc="/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png">
               <h3>Experience digitale</h3>
-              Notre agence experte en contenus immersifs offre des services de
-              conseil aux entreprises, pour l’utilisation de la réalité
-              virtuelle, de la réalité augmentée et de la réalité mixte de
-              l’animation événementielle, à la veille technologique jusqu’au
-              développement de module de formation innovant
+              <p>
+                Notre agence experte en contenus immersifs offre des services de
+                conseils aux entreprises pour l’utilisation de la réalité
+                virtuelle, de la réalité augmentée et de la réalité mixte; de
+                l’animation événementielle, à la veille technologique jusqu’au
+                développement de modules de formation innovants.
+              </p>
             </ServiceCard>
           </div>
         </section>
@@ -58,7 +72,7 @@ const Page = () => {
         </section>
         <section className="PeoplesContainer">
           <h2 className="Title">Notre équipe</h2>
-          <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
+          <p>Une équipe d’experts dédiés à l’organisation de vos événements</p>
           <div className="ListContainer">
             <PeopleCard
               imageSrc="/images/stephanie-liverani-Zz5LQe-VSMY-unsplash.png"
@@ -113,14 +127,20 @@ const Page = () => {
       </main>
       <footer className="row">
         <div className="col presta">
-          <h3>Notre derniére prestation</h3>
-          <EventCard
-            imageSrc={last?.cover}
-            title={last?.title}
-            date={new Date(last?.date)}
-            small
-            label="boom"
-          />
+          <h3>Notre dernière prestation</h3>
+          {lastEvent ? (
+            <EventCard
+              imageSrc={lastEvent.cover}
+              title={lastEvent.title}
+              description={lastEvent.description}
+              date={new Date(lastEvent.date)}
+              small
+              // label="boom"
+              label="expérience digitale"
+            />
+          ) : (
+            <p>Notre dernière prestation ne semble pas disponible..</p>
+          )}
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>
@@ -128,16 +148,16 @@ const Page = () => {
           <div>01 23 45 67 89</div>
           <div>contact@77events.com</div>
           <div>
-            <a href="#twitch">
+            <a href="twitch">
               <Icon name="twitch" />
             </a>
-            <a href="#facebook">
+            <a href="facebook">
               <Icon name="facebook" />
             </a>
-            <a href="#twitter">
+            <a href="twitter">
               <Icon name="twitter" />
             </a>
-            <a href="#youtube">
+            <a href="youtube">
               <Icon name="youtube" />
             </a>
           </div>
@@ -147,8 +167,8 @@ const Page = () => {
           <p>
             Une agence événementielle propose des prestations de service
             spécialisées dans la conception et l&apos;organisation de divers
-            événements tels que des événements festifs, des manifestations
-            sportives et culturelles, des événements professionnels
+            événements tels que des événements festifs ou professionnels ainsi
+            que des manifestations sportives et culturelles.
           </p>
         </div>
       </footer>
