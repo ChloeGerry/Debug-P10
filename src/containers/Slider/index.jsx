@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Loader from '../../components/Loader';
 import { useData } from '../../contexts/DataContext';
 import { getMonth } from '../../helpers/Date';
 
@@ -8,13 +9,13 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(1);
 
+  if (!data) {
+    return <Loader />;
+  }
+
   const byDateDesc = data?.focus.sort((evtA, evtB) => {
     return new Date(evtA.date) < new Date(evtB.date) ? -1 : 1;
   });
-
-  if (!byDateDesc) {
-    <div>Loading</div>;
-  }
 
   const nextCard = () => {
     setTimeout(() => {

@@ -2,7 +2,6 @@ import Menu from '../../containers/Menu';
 import ServiceCard from '../../components/ServiceCard';
 import EventCard from '../../components/EventCard';
 import PeopleCard from '../../components/PeopleCard';
-
 import './style.scss';
 import EventList from '../../containers/Events';
 import Slider from '../../containers/Slider';
@@ -10,11 +9,17 @@ import Logo from '../../components/Logo';
 import Icon from '../../components/Icon';
 import Form from '../../containers/Form';
 import Modal from '../../containers/Modal';
+import ModalEvent from '../../containers/ModalEvent';
+import Loader from '../../components/Loader';
 import { useData } from '../../contexts/DataContext';
 
 const Page = () => {
   const { data } = useData();
   let lastEvent = null;
+
+  if (!data) {
+    return <Loader />;
+  }
 
   data.events.forEach((dataEvent) => {
     if (dataEvent.id === data.events.length) {
@@ -129,15 +134,20 @@ const Page = () => {
         <div className="col presta">
           <h3>Notre dernière prestation</h3>
           {lastEvent ? (
-            <EventCard
-              imageSrc={lastEvent.cover}
-              title={lastEvent.title}
-              description={lastEvent.description}
-              date={new Date(lastEvent.date)}
-              small
-              // label="boom"
-              label="expérience digitale"
-            />
+            <Modal Content={<ModalEvent event={lastEvent} />}>
+              {({ setIsOpened }) => (
+                <EventCard
+                  onClick={() => setIsOpened(true)}
+                  imageSrc={lastEvent.cover}
+                  title={lastEvent.title}
+                  description={lastEvent.description}
+                  date={new Date(lastEvent.date)}
+                  small
+                  // label="boom"
+                  label="expérience digitale"
+                />
+              )}
+            </Modal>
           ) : (
             <p>Notre dernière prestation ne semble pas disponible..</p>
           )}

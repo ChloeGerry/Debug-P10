@@ -35,7 +35,7 @@ EventCard.propTypes = {
   imageAlt: PropTypes.string,
   date: PropTypes.instanceOf(Date).isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   small: PropTypes.bool,
   label: PropTypes.string.isRequired,
 };

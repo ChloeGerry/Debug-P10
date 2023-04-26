@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import Loader from '../../components/Loader';
 
 const DataContext = createContext({});
 
@@ -24,6 +25,7 @@ export const DataProvider = ({ children }) => {
     try {
       setData(await api.loadData());
     } catch (err) {
+      <Loader />;
       setError(err);
     }
   }, []);
