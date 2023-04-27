@@ -69,30 +69,3 @@ const Slider = () => {
   );
 };
 export default Slider;
-
-{
-  /* <div className="SlideCard__paginationContainer">
-              <div className="SlideCard__pagination">
-                {byDateDesc.map((_, radioIndex) => {
-                  radioIndex++;
-                  console.log('radioIndex', radioIndex);
-                  console.log('id', id);
-                  console.log(id === radioIndex);
-                  return id === radioIndex ? (
-                    <input
-                      key={`${radioIndex}-${title}`}
-                      type="radio"
-                      name="radio-button"
-                      checked={id === radioIndex}
-                    />
-                  ) : (
-                    <input
-                      key={`${radioIndex}-${title}`}
-                      type="radio"
-                      name="radio-button"
-                    />
-                  );
-                })}
-              </div>
-            </div> */
-}

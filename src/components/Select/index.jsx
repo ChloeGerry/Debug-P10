@@ -2,7 +2,7 @@
 // eslint-disable jsx-a11y/click-events-have-key-events
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import '../../colors.scss';
 import './style.scss';
 
 const Select = ({
@@ -13,13 +13,15 @@ const Select = ({
   label,
   type = 'normal',
 }) => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState('Toutes');
   const [collapsed, setCollapsed] = useState(true);
+
   const changeValue = (newValue) => {
-    onChange();
+    onChange(newValue);
     setValue(newValue);
     setCollapsed(newValue);
   };
+
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
@@ -31,14 +33,22 @@ const Select = ({
           {!collapsed && (
             <>
               {!titleEmpty && (
-                <li onClick={() => changeValue(null)}>
-                  <input defaultChecked={!value} name="selected" type="radio" />{' '}
+                <li>
+                  <input
+                    defaultChecked={!value}
+                    name="selected"
+                    type="radio"
+                    onClick={() => changeValue('Toutes')}
+                  />{' '}
                   Toutes
                 </li>
               )}
               {selection.map((s) => (
-                <li key={s} onClick={() => changeValue(s)}>
+                <li key={s}>
                   <input
+                    onClick={() => {
+                      return changeValue(s);
+                    }}
                     defaultChecked={value === s}
                     name="selected"
                     type="radio"
