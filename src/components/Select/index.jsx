@@ -35,7 +35,7 @@ const Select = ({
               {!titleEmpty && (
                 <li>
                   <input
-                    defaultChecked={!value}
+                    defaultChecked={value}
                     name="selected"
                     type="radio"
                     onClick={() => changeValue('Toutes')}

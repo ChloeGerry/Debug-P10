@@ -34,7 +34,18 @@ const EventList = () => {
   };
 
   const filterEventByTheme = (eventTypes) => {
-    return eventTypes.filter((eventType) => eventType.type === type);
+    let filteredEventPerPage = [];
+    if (type === 'Toutes') {
+      filteredEventPerPage = filteredEvents;
+    } else {
+      filteredEventPerPage = eventTypes.filter(
+        (eventType) => eventType.type === type
+      );
+    }
+    return filteredEventPerPage.slice(
+      (currentPage - 1) * PER_PAGE,
+      currentPage * PER_PAGE
+    );
   };
 
   return (
@@ -44,45 +55,32 @@ const EventList = () => {
         <h3 className="SelectTitle">Catégories</h3>
         <Select selection={Array.from(typeList)} onChange={changeType} />
         <div id="events" className="ListContainer">
-          {type === 'Toutes'
-            ? filteredEvents.map((event) => {
-                return (
-                  <Modal key={event.id} Content={<ModalEvent event={event} />}>
-                    {({ setIsOpened }) => (
-                      <EventCard
-                        onClick={() => setIsOpened(true)}
-                        imageSrc={event.cover}
-                        title={event.title}
-                        date={new Date(event.date)}
-                        label={event.type}
-                      />
-                    )}
-                  </Modal>
-                );
-              })
-            : filterEventByTheme(data.events).map((event) => {
-                return (
-                  <Modal key={event.id} Content={<ModalEvent event={event} />}>
-                    {({ setIsOpened }) => (
-                      <EventCard
-                        onClick={() => setIsOpened(true)}
-                        imageSrc={event.cover}
-                        title={event.title}
-                        date={new Date(event.date)}
-                        label={event.type}
-                      />
-                    )}
-                  </Modal>
-                );
-              })}
+          {filterEventByTheme(data.events).map((event) => {
+            console.log('length', filterEventByTheme(data.events).length);
+            return (
+              <Modal key={event.id} Content={<ModalEvent event={event} />}>
+                {({ setIsOpened }) => (
+                  <EventCard
+                    onClick={() => setIsOpened(true)}
+                    imageSrc={event.cover}
+                    title={event.title}
+                    date={new Date(event.date)}
+                    label={event.type}
+                  />
+                )}
+              </Modal>
+            );
+          })}
         </div>
         <div className="Pagination">
-          {[...Array(pageNumber || 0)].map((_, n) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <a key={n} href="#events" onClick={() => setCurrentPage(n + 1)}>
-              {n + 1}
-            </a>
-          ))}
+          {[...Array(pageNumber || 0)].map((_, n) => {
+            return (
+              // eslint-disable-next-line react/no-array-index-key
+              <a key={n} href="#events" onClick={() => setCurrentPage(n + 1)}>
+                {n + 1}
+              </a>
+            );
+          })}
         </div>
       </>
     </>
