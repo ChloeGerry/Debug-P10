@@ -149,7 +149,7 @@ const Page = () => {
               )}
             </Modal>
           ) : (
-            <p>Notre dernière prestation ne semble pas disponible..</p>
+            <div>Notre dernière prestation ne semble pas disponible..</div>
           )}
         </div>
         <div className="col contact">

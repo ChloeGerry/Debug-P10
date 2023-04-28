@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import EventCard from '../../components/EventCard';
-import Loader from '../../components/Loader';
 import Select from '../../components/Select';
 import { useData } from '../../contexts/DataContext';
 import Modal from '../Modal';
@@ -41,61 +40,51 @@ const EventList = () => {
   return (
     <>
       {error && <div>An error occured</div>}
-      {data === null ? (
-        <Loader />
-      ) : (
-        <>
-          <h3 className="SelectTitle">Catégories</h3>
-          <Select selection={Array.from(typeList)} onChange={changeType} />
-          <div id="events" className="ListContainer">
-            {type === 'Toutes'
-              ? filteredEvents.map((event) => {
-                  return (
-                    <Modal
-                      key={event.id}
-                      Content={<ModalEvent event={event} />}
-                    >
-                      {({ setIsOpened }) => (
-                        <EventCard
-                          onClick={() => setIsOpened(true)}
-                          imageSrc={event.cover}
-                          title={event.title}
-                          date={new Date(event.date)}
-                          label={event.type}
-                        />
-                      )}
-                    </Modal>
-                  );
-                })
-              : filterEventByTheme(data.events).map((event) => {
-                  return (
-                    <Modal
-                      key={event.id}
-                      Content={<ModalEvent event={event} />}
-                    >
-                      {({ setIsOpened }) => (
-                        <EventCard
-                          onClick={() => setIsOpened(true)}
-                          imageSrc={event.cover}
-                          title={event.title}
-                          date={new Date(event.date)}
-                          label={event.type}
-                        />
-                      )}
-                    </Modal>
-                  );
-                })}
-          </div>
-          <div className="Pagination">
-            {[...Array(pageNumber || 0)].map((_, n) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <a key={n} href="#events" onClick={() => setCurrentPage(n + 1)}>
-                {n + 1}
-              </a>
-            ))}
-          </div>
-        </>
-      )}
+      <>
+        <h3 className="SelectTitle">Catégories</h3>
+        <Select selection={Array.from(typeList)} onChange={changeType} />
+        <div id="events" className="ListContainer">
+          {type === 'Toutes'
+            ? filteredEvents.map((event) => {
+                return (
+                  <Modal key={event.id} Content={<ModalEvent event={event} />}>
+                    {({ setIsOpened }) => (
+                      <EventCard
+                        onClick={() => setIsOpened(true)}
+                        imageSrc={event.cover}
+                        title={event.title}
+                        date={new Date(event.date)}
+                        label={event.type}
+                      />
+                    )}
+                  </Modal>
+                );
+              })
+            : filterEventByTheme(data.events).map((event) => {
+                return (
+                  <Modal key={event.id} Content={<ModalEvent event={event} />}>
+                    {({ setIsOpened }) => (
+                      <EventCard
+                        onClick={() => setIsOpened(true)}
+                        imageSrc={event.cover}
+                        title={event.title}
+                        date={new Date(event.date)}
+                        label={event.type}
+                      />
+                    )}
+                  </Modal>
+                );
+              })}
+        </div>
+        <div className="Pagination">
+          {[...Array(pageNumber || 0)].map((_, n) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <a key={n} href="#events" onClick={() => setCurrentPage(n + 1)}>
+              {n + 1}
+            </a>
+          ))}
+        </div>
+      </>
     </>
   );
 };
