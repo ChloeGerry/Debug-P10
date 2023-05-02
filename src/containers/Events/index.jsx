@@ -33,15 +33,18 @@ const EventList = () => {
     setType(evtType);
   };
 
-  const filterEventByTheme = (eventTypes) => {
+  let allEventsByType = [];
+  const filterEventByTheme = (events) => {
     let filteredEventPerPage = [];
-    if (type === 'Toutes') {
-      filteredEventPerPage = filteredEvents;
-    } else {
-      filteredEventPerPage = eventTypes.filter(
-        (eventType) => eventType.type === type
-      );
-    }
+    events.forEach((event) => {
+      if (type === 'Toutes') {
+        filteredEventPerPage = allEventsByType;
+        allEventsByType.push(event);
+      } else if (event.type === type) {
+        filteredEventPerPage = events.filter((event) => event.type === type);
+        allEventsByType.push(event);
+      }
+    });
     return filteredEventPerPage.slice(
       (currentPage - 1) * PER_PAGE,
       currentPage * PER_PAGE
@@ -50,37 +53,38 @@ const EventList = () => {
 
   return (
     <>
-      {error && <div>An error occured</div>}
+      {error && <div>Il semble y avoir une erreur</div>}
       <>
         <h3 className="SelectTitle">Catégories</h3>
         <Select selection={Array.from(typeList)} onChange={changeType} />
         <div id="events" className="ListContainer">
-          {filterEventByTheme(data.events).map((event) => {
-            console.log('length', filterEventByTheme(data.events).length);
-            return (
-              <Modal key={event.id} Content={<ModalEvent event={event} />}>
-                {({ setIsOpened }) => (
-                  <EventCard
-                    onClick={() => setIsOpened(true)}
-                    imageSrc={event.cover}
-                    title={event.title}
-                    date={new Date(event.date)}
-                    label={event.type}
-                  />
-                )}
-              </Modal>
-            );
-          })}
+          {filterEventByTheme(data.events).map((event) => (
+            <Modal key={event.id} Content={<ModalEvent event={event} />}>
+              {({ setIsOpened }) => (
+                <EventCard
+                  onClick={() => setIsOpened(true)}
+                  imageSrc={event.cover}
+                  title={event.title}
+                  date={new Date(event.date)}
+                  label={event.type}
+                />
+              )}
+            </Modal>
+          ))}
         </div>
         <div className="Pagination">
-          {[...Array(pageNumber || 0)].map((_, n) => {
-            return (
+          {allEventsByType.length > PER_PAGE ? (
+            [...Array(pageNumber || 0)].map((_, n) => (
               // eslint-disable-next-line react/no-array-index-key
               <a key={n} href="#events" onClick={() => setCurrentPage(n + 1)}>
                 {n + 1}
               </a>
-            );
-          })}
+            ))
+          ) : (
+            <a key={1} href="#events">
+              {1}
+            </a>
+          )}
         </div>
       </>
     </>
