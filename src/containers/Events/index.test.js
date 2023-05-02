@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { api, DataProvider } from '../../contexts/DataContext';
-import Events from './index';
+import EventList from './index';
 
 const data = {
   events: [
@@ -16,8 +16,8 @@ const data = {
       periode: '24-25-26 Avril',
       prestations: [
         '1 espace d’exposition',
-        '1 scéne principale',
-        '2 espaces de restaurations',
+        '1 scène principale',
+        '2 espaces de restauration',
         '1 site web dédié',
       ],
     },
@@ -32,7 +32,7 @@ const data = {
         'Présentation des outils analytics aux professionnels du secteur',
       nb_guesses: 1300,
       periode: '24-25-26 Avril',
-      prestations: ['1 espace d’exposition', '1 scéne principale'],
+      prestations: ['1 espace d’exposition', '1 scène principale'],
     },
   ],
 };
@@ -42,28 +42,30 @@ describe('When Events is created', () => {
     api.loadData = jest.fn().mockReturnValue(data);
     render(
       <DataProvider>
-        <Events />
+        <EventList />
       </DataProvider>
     );
-    await screen.findByText('avril');
+    await screen.findAllByText('avril');
   });
   describe('and an error occured', () => {
     it('an error message is displayed', async () => {
       api.loadData = jest.fn().mockRejectedValue();
       render(
         <DataProvider>
-          <Events />
+          <EventList />
         </DataProvider>
       );
-      expect(await screen.findByText('An error occured')).toBeInTheDocument();
+      expect(
+        await screen.findByText('Il semble y avoir une erreur')
+      ).toBeInTheDocument();
     });
   });
   describe('and we select a category', () => {
-    it.only('an filtered list is displayed', async () => {
+    it('an filtered list is displayed', async () => {
       api.loadData = jest.fn().mockReturnValue(data);
       render(
         <DataProvider>
-          <Events />
+          <EventList />
         </DataProvider>
       );
       await screen.findByText('Forum #productCON');
@@ -92,7 +94,7 @@ describe('When Events is created', () => {
       api.loadData = jest.fn().mockReturnValue(data);
       render(
         <DataProvider>
-          <Events />
+          <EventList />
         </DataProvider>
       );
 
@@ -104,7 +106,7 @@ describe('When Events is created', () => {
         })
       );
 
-      await screen.findByText('24-25-26 Février');
+      await screen.findByText('24-25-26 Avril');
       await screen.findByText('1 site web dédié');
     });
   });

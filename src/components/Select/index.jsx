@@ -34,25 +34,30 @@ const Select = ({
             <>
               {!titleEmpty && (
                 <li>
-                  <input
-                    defaultChecked={value}
-                    name="selected"
-                    // name="selected"
-                    type="radio"
-                    onClick={() => changeValue('Toutes')}
-                  />{' '}
-                  Toutes
+                  <label className="Select__label">
+                    <input
+                      defaultChecked={value}
+                      name="selected"
+                      value={value}
+                      type="radio"
+                      onClick={() => changeValue('Toutes')}
+                    />{' '}
+                    Toutes
+                  </label>
                 </li>
               )}
               {selection.map((s) => (
                 <li key={s}>
-                  <input
-                    onClick={() => changeValue(s)}
-                    defaultChecked={value === s}
-                    name="selected"
-                    type="radio"
-                  />{' '}
-                  {s}
+                  <label className="Select__label">
+                    <input
+                      onClick={() => changeValue(s)}
+                      defaultChecked={value === s}
+                      name="selected"
+                      value={value}
+                      type="radio"
+                    />{' '}
+                    {s}
+                  </label>
                 </li>
               ))}
             </>
@@ -94,6 +99,7 @@ Select.propTypes = {
   selection: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func,
   name: PropTypes.string,
+  value: PropTypes.string,
   titleEmpty: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,

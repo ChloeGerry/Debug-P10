@@ -26,7 +26,7 @@ const EventList = () => {
   );
 
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
-  const typeList = new Set(data?.events.map((event) => event.type));
+  const typeList = new Set(data?.events?.map((event) => event.type));
 
   const changeType = (evtType) => {
     setCurrentPage(1);
@@ -36,7 +36,7 @@ const EventList = () => {
   let allEventsByType = [];
   const filterEventByTheme = (events) => {
     let filteredEventPerPage = [];
-    events.forEach((event) => {
+    events?.forEach((event) => {
       if (type === 'Toutes') {
         filteredEventPerPage = allEventsByType;
         allEventsByType.push(event);
@@ -58,7 +58,7 @@ const EventList = () => {
         <h3 className="SelectTitle">Catégories</h3>
         <Select selection={Array.from(typeList)} onChange={changeType} />
         <div id="events" className="ListContainer">
-          {filterEventByTheme(data.events).map((event) => (
+          {filterEventByTheme(data?.events).map((event) => (
             <Modal key={event.id} Content={<ModalEvent event={event} />}>
               {({ setIsOpened }) => (
                 <EventCard

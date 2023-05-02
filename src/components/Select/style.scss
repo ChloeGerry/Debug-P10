@@ -43,6 +43,9 @@
       text-transform: capitalize;
     }
   }
+  &__label {
+    display: flex;
+  }
   input {
     width: 16px;
     height: 16px;
