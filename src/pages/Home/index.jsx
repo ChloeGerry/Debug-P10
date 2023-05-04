@@ -118,14 +118,17 @@ const Page = () => {
               <div className="ModalMessage--success">
                 <div>Message envoyé !</div>
                 <p>
-                  Merci pour votre message nous tâcherons de vous répondre dans
+                  Merci pour votre message, nous tâcherons de vous répondre dans
                   les plus brefs délais
                 </p>
               </div>
             }
           >
             {({ setIsOpened }) => (
-              <Form onSuccess={() => setIsOpened(true)} onError={() => null} />
+              <Form
+                onSuccess={() => setIsOpened(true)}
+                onError={() => <div>Il semble y avoir une erreur...</div>}
+              />
             )}
           </Modal>
         </div>
@@ -143,7 +146,6 @@ const Page = () => {
                   description={lastEvent.description}
                   date={new Date(lastEvent.date)}
                   small
-                  // label="boom"
                   label="expérience digitale"
                 />
               )}

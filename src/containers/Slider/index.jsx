@@ -20,7 +20,12 @@ const Slider = () => {
 
   useEffect(() => {
     nextCard();
-  }, [nextCard]);
+  }, [nextCard()]);
+
+  const changeTheSlider = (event) => {
+    const newIndex = Number(event.target.checked);
+    setIndex(newIndex);
+  };
 
   return (
     <div className="SlideCardList">
@@ -47,12 +52,14 @@ const Slider = () => {
                 {byDateDesc.map((_, radioIndex) => {
                   radioIndex++;
                   return (
-                    <input
-                      key={radioIndex}
-                      type="radio"
-                      name="radio-button"
-                      checked={index === radioIndex}
-                    />
+                    <label key={radioIndex}>
+                      <input
+                        type="radio"
+                        name="radio-button"
+                        checked={index === radioIndex}
+                        onChange={changeTheSlider}
+                      />
+                    </label>
                   );
                 })}
               </div>
@@ -63,4 +70,5 @@ const Slider = () => {
     </div>
   );
 };
+
 export default Slider;

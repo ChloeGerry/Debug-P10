@@ -24,7 +24,7 @@ const Select = ({
 
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
-      {label && <div className="label">{label}</div>}
+      {label && <label className="label">{label}</label>}
       <div className="Select">
         <ul>
           <li className={collapsed ? 'SelectTitle--show' : 'SelectTitle--hide'}>
