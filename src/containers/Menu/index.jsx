@@ -17,13 +17,12 @@ const Menu = () => (
       <li>
         <a href="#notre-equipe">Notre équipe</a>
       </li>
+      <li>
+        <a href="#contact" className="navigation__contact">
+          Contact
+        </a>
+      </li>
     </ul>
-    <Button
-      title="contact"
-      onClick={() => (window.document.location.hash = '#contact')}
-    >
-      Contact
-    </Button>
   </nav>
 );
 

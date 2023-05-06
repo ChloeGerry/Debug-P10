@@ -4,7 +4,7 @@ import Select from '../../components/Select';
 import { useData } from '../../contexts/DataContext';
 import Modal from '../Modal';
 import ModalEvent from '../ModalEvent';
-import './style.css';
+import './style.scss';
 
 const PER_PAGE = 9;
 
@@ -56,7 +56,11 @@ const EventList = () => {
       {error && <div>Il semble y avoir une erreur</div>}
       <>
         <h3 className="SelectTitle">Catégories</h3>
-        <Select selection={Array.from(typeList)} onChange={changeType} />
+        <Select
+          selection={Array.from(typeList)}
+          value={type}
+          onChange={changeType}
+        />
         <div id="events" className="ListContainer">
           {filterEventByTheme(data?.events).map((event) => (
             <Modal key={event.id} Content={<ModalEvent event={event} />}>

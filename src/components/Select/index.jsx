@@ -8,17 +8,16 @@ import './style.scss';
 const Select = ({
   selection,
   onChange,
-  name,
   titleEmpty,
+  name,
+  value,
   label,
   type = 'normal',
 }) => {
-  const [value, setValue] = useState('Toutes');
   const [collapsed, setCollapsed] = useState(true);
 
   const changeValue = (newValue) => {
     onChange(newValue);
-    setValue(newValue);
     setCollapsed(newValue);
   };
 
@@ -53,7 +52,7 @@ const Select = ({
                       onClick={() => changeValue(s)}
                       defaultChecked={value === s}
                       name="selected"
-                      value={value}
+                      value={s}
                       type="radio"
                     />{' '}
                     {s}
@@ -99,16 +98,17 @@ Select.propTypes = {
   selection: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func,
   name: PropTypes.string,
-  value: PropTypes.string,
   titleEmpty: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
+  value: PropTypes.string,
 };
 
 Select.defaultProps = {
   onChange: () => null,
   titleEmpty: false,
   label: '',
+  value: '',
   type: 'normal',
   name: 'select',
 };

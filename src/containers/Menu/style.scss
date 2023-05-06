@@ -1,10 +1,10 @@
-@import "src/colors.scss";
+@import 'src/colors.scss';
 
 header {
   height: 112px;
 }
 nav {
-  font-family: "Manrope", sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-weight: 500;
   display: flex;
   width: 100%;
@@ -16,16 +16,40 @@ nav {
     display: flex;
     width: 80%;
     justify-content: flex-end;
+    align-items: center;
     margin: 0;
     li {
       list-style: none;
-      margin: 40px;
+      margin-left: 80px;
       padding: 0;
       a {
         text-decoration: none;
         color: $black;
       }
     }
-    padding-right: 50px;
+  }
+}
+
+.navigation__contact {
+  background: linear-gradient(
+    100deg,
+    rgba(101, 63, 255, 1) 0%,
+    rgba(150, 125, 255, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  min-width: 210px;
+  border: none;
+  color: white;
+  font-size: 16pt;
+  &:hover {
+    background: linear-gradient(
+      100deg,
+      rgba(101, 63, 255, 1) 0%,
+      rgba(50, 0, 255, 1) 100%
+    );
+    cursor: pointer;
   }
 }

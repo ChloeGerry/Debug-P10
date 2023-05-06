@@ -15,17 +15,16 @@ import { useData } from '../../contexts/DataContext';
 
 const Page = () => {
   const { data } = useData();
-  let lastEvent = null;
 
   if (!data) {
     return <Loader />;
   }
 
-  data.events.forEach((dataEvent) => {
-    if (dataEvent.id === data.events.length) {
-      lastEvent = dataEvent;
-    }
+  const dataEventsCopy = JSON.parse(JSON.stringify(data?.events));
+  const sortEventsList = dataEventsCopy.sort((evtA, evtB) => {
+    return new Date(evtA.date) < new Date(evtB.date) ? 1 : -1;
   });
+  const lastEvent = sortEventsList[0];
 
   return (
     <>

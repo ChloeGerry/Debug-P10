@@ -22,18 +22,12 @@ const Slider = () => {
     nextCard();
   }, [nextCard()]);
 
-  const changeTheSlider = (event) => {
-    const newIndex = Number(event.target.checked);
-    setIndex(newIndex);
-  };
-
   return (
     <div className="SlideCardList">
       {byDateDesc?.map(({ title, cover, description, date, id }) => {
         return (
-          <>
+          <div key={id}>
             <div
-              key={id}
               className={`SlideCard SlideCard--${
                 index === id ? 'display' : 'hide'
               }`}
@@ -57,14 +51,14 @@ const Slider = () => {
                         type="radio"
                         name="radio-button"
                         checked={index === radioIndex}
-                        onChange={changeTheSlider}
+                        onChange={() => null}
                       />
                     </label>
                   );
                 })}
               </div>
             </div>
-          </>
+          </div>
         );
       })}
     </div>

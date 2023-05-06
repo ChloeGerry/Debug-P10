@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Field, { FIELD_TYPES } from '../../components/Field';
 import Select from '../../components/Select';
@@ -11,40 +11,76 @@ const mockContactApi = () =>
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [selectedEvent, setSelectedEvent] = useState('');
+  const [email, setEmail] = useState('');
+  const [postContent, setPostContent] = useState('');
+
+  const updateSelectedEvent = (newValue) => {
+    setSelectedEvent(newValue);
+  };
 
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
+      if (!selectedEvent) {
+        alert("Vous devez choisir un type d'événement");
+        return;
+      }
       setSending(true);
       // We try to call mockContactApi
       try {
         await mockContactApi();
         setSending(false);
         onSuccess();
-        location.reload();
+        setLastName('');
+        setFirstName('');
+        setSelectedEvent('');
+        setEmail('');
+        setPostContent('');
       } catch (err) {
         console.log(err);
         setSending(true);
         onError(err);
       }
     },
-    [onSuccess, onError]
+    [onSuccess, onError, selectedEvent]
   );
 
   return (
     <form onSubmit={sendContact}>
       <div className="row">
         <div className="col">
-          <Field placeholder="" label="Nom" type={FIELD_TYPES.INPUT_TEXT} />
-          <Field placeholder="" label="Prénom" type={FIELD_TYPES.INPUT_TEXT} />
+          <Field
+            placeholder=""
+            label="Nom"
+            type={FIELD_TYPES.INPUT_TEXT}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <Field
+            placeholder=""
+            label="Prénom"
+            type={FIELD_TYPES.INPUT_TEXT}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
           <Select
             selection={['Personel', 'Entreprise']}
-            onChange={() => null}
             label="Personel / Entreprise"
             type="large"
             titleEmpty
+            value={selectedEvent}
+            onChange={updateSelectedEvent}
           />
-          <Field placeholder="" label="Email" type={FIELD_TYPES.INPUT_EMAIL} />
+          <Field
+            placeholder=""
+            label="Email"
+            type={FIELD_TYPES.INPUT_EMAIL}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
             {sending ? 'En cours' : 'Envoyer'}
           </Button>
@@ -54,6 +90,8 @@ const Form = ({ onSuccess, onError }) => {
             placeholder="message"
             label="Message"
             type={FIELD_TYPES.TEXTAREA}
+            value={postContent}
+            onChange={(e) => setPostContent(e.target.value)}
           />
         </div>
       </div>

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import './style.scss';
 
 export const FIELD_TYPES = {
@@ -8,8 +7,9 @@ export const FIELD_TYPES = {
   TEXTAREA: 3,
 };
 
-const Field = ({ type, label, name, placeholder }) => {
+const Field = ({ type, label, name, placeholder, value, onChange }) => {
   let component;
+
   switch (type) {
     case FIELD_TYPES.INPUT_TEXT:
       component = (
@@ -18,6 +18,8 @@ const Field = ({ type, label, name, placeholder }) => {
           name={name}
           placeholder={placeholder}
           data-testid="field-testid"
+          value={value}
+          onChange={onChange}
           required
         />
       );
@@ -29,12 +31,22 @@ const Field = ({ type, label, name, placeholder }) => {
           name={name}
           placeholder={placeholder}
           data-testid="field-testid"
+          value={value}
+          onChange={onChange}
           required
         />
       );
       break;
     case FIELD_TYPES.TEXTAREA:
-      component = <textarea name={name} data-testid="field-testid" required />;
+      component = (
+        <textarea
+          name={name}
+          data-testid="field-testid"
+          required
+          value={value}
+          onChange={onChange}
+        />
+      );
       break;
     default:
       component = (
@@ -43,6 +55,8 @@ const Field = ({ type, label, name, placeholder }) => {
           name={name}
           placeholder={placeholder}
           data-testid="field-testid"
+          value={value}
+          onChange={onChange}
           required
         />
       );
@@ -60,6 +74,8 @@ Field.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 Field.defaultProps = {
   label: '',
