@@ -20,7 +20,7 @@ const Slider = () => {
 
   useEffect(() => {
     nextCard();
-  }, [nextCard()]);
+  }, [nextCard]);
 
   return (
     <div className="SlideCardList">
