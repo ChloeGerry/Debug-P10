@@ -29,7 +29,6 @@ const Form = ({ onSuccess, onError }) => {
         return;
       }
       setSending(true);
-      // We try to call mockContactApi
       try {
         await mockContactApi();
         setSending(false);
@@ -41,7 +40,7 @@ const Form = ({ onSuccess, onError }) => {
         setPostContent('');
       } catch (err) {
         console.log(err);
-        setSending(true);
+        setSending(false);
         onError(err);
       }
     },
