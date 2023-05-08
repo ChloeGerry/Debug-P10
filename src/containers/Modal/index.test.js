@@ -1,7 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/button-has-type */
-// /* eslint-disable jsx-a11y/control-has-associated-label */
-
 import { fireEvent, render, screen } from '@testing-library/react';
 import Modal from './index';
 
@@ -21,7 +17,6 @@ describe('When Modal data is created', () => {
           {() => <button data-testid="open-modal"></button>}
         </Modal>
       );
-      expect(screen.queryByText('modal content')).not.toBeInTheDocument();
       fireEvent(
         screen.getByTestId('open-modal'),
         new MouseEvent('click', {
@@ -29,6 +24,7 @@ describe('When Modal data is created', () => {
           bubbles: true,
         })
       );
+      expect(screen.queryByText('modal content')).not.toBeInTheDocument();
     });
   });
 

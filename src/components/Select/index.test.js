@@ -11,7 +11,7 @@ describe('When a select is created', () => {
   });
   it('a collapse action button is displayed', () => {
     render(<Select selection={['value1', 'value2']} />);
-    const collapseButtonElement = screen.getByTestId('collapse-button-testid');
+    const collapseButtonElement = screen.getByTestId('select');
     expect(collapseButtonElement).toBeInTheDocument();
   });
 
@@ -26,9 +26,7 @@ describe('When a select is created', () => {
   describe('and a click is trigger on collapse button', () => {
     it('a list of values is displayed', () => {
       render(<Select selection={['value1', 'value2']} />);
-      const collapseButtonElement = screen.getByTestId(
-        'collapse-button-testid'
-      );
+      const collapseButtonElement = screen.getByTestId('select');
       fireEvent(
         collapseButtonElement,
         new MouseEvent('click', {
@@ -45,9 +43,8 @@ describe('When a select is created', () => {
       it('a onChange callback is called', () => {
         const onChange = jest.fn();
         render(<Select selection={['value1', 'value2']} onChange={onChange} />);
-        const collapseButtonElement = screen.getByTestId(
-          'collapse-button-testid'
-        );
+        const collapseButtonElement = screen.getByTestId('select');
+
         fireEvent(
           collapseButtonElement,
           new MouseEvent('click', {
@@ -55,6 +52,7 @@ describe('When a select is created', () => {
             cancelable: true,
           })
         );
+
         const choice1 = screen.getByText('value1');
         fireEvent(
           choice1,
@@ -73,7 +71,7 @@ describe('When a select is created', () => {
           })
         );
 
-        const choiceAll = screen.getByText('Toutes');
+        const choiceAll = screen.getByTestId('toutes-testid');
         fireEvent(
           choiceAll,
           new MouseEvent('click', {

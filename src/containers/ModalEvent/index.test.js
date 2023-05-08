@@ -21,11 +21,13 @@ const data = {
 describe('When Modal data is created', () => {
   it('a list of mandatories data is displayed', async () => {
     render(<ModalEvent event={data} />);
-    await screen.findByText('1 espace d’exposition');
-    await screen.findByText('24-25-26 Février');
-    await screen.findByText(
-      'Présentation des outils analytics aux professionnels du secteur'
+    expect(await screen.findByText('1 espace d’exposition'));
+    expect(await screen.findByText('24-25-26 Février'));
+    expect(
+      await screen.findByText(
+        'Présentation des outils analytics aux professionnels du secteur'
+      )
     );
-    await screen.findByText('Conférence #productCON');
+    expect(await screen.findByText('Conférence #productCON'));
   });
 });

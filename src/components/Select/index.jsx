@@ -39,6 +39,7 @@ const Select = ({
                       name="selected"
                       value={value}
                       type="radio"
+                      data-testid="toutes-testid"
                       onClick={() => changeValue('Toutes')}
                     />{' '}
                     Toutes
@@ -52,6 +53,7 @@ const Select = ({
                       onClick={() => changeValue(s)}
                       defaultChecked={value === s}
                       name="selected"
+                      data-testid={s}
                       value={s}
                       type="radio"
                     />{' '}
@@ -65,7 +67,7 @@ const Select = ({
         <input type="hidden" value={value || ''} name={name} />
         <button
           type="button"
-          data-testid="collapse-button-testid"
+          data-testid={name}
           className={collapsed ? 'open' : 'close'}
           onClick={(e) => {
             e.preventDefault();

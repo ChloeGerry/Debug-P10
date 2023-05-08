@@ -45,8 +45,9 @@ describe('When Events is created', () => {
         <EventList />
       </DataProvider>
     );
-    await screen.findAllByText('avril');
+    expect(await screen.findAllByText('avril'));
   });
+
   describe('and an error occured', () => {
     it('an error message is displayed', async () => {
       api.loadData = jest.fn().mockRejectedValue();
@@ -60,6 +61,7 @@ describe('When Events is created', () => {
       ).toBeInTheDocument();
     });
   });
+
   describe('and we select a category', () => {
     it('an filtered list is displayed', async () => {
       api.loadData = jest.fn().mockReturnValue(data);
@@ -70,7 +72,7 @@ describe('When Events is created', () => {
       );
       await screen.findByText('Forum #productCON');
       fireEvent(
-        await screen.findByTestId('collapse-button-testid'),
+        await screen.findByTestId('select'),
         new MouseEvent('click', {
           cancelable: true,
           bubbles: true,
@@ -83,7 +85,6 @@ describe('When Events is created', () => {
           bubbles: true,
         })
       );
-
       await screen.findByText('Conférence #productCON');
       expect(screen.queryByText('Forum #productCON')).not.toBeInTheDocument();
     });
@@ -106,8 +107,8 @@ describe('When Events is created', () => {
         })
       );
 
-      await screen.findByText('24-25-26 Avril');
-      await screen.findByText('1 site web dédié');
+      expect(await screen.findByText('24-25-26 Avril'));
+      expect(await screen.findByText('1 site web dédié'));
     });
   });
 });

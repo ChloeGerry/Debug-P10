@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import Field, { FIELD_TYPES } from '../../components/Field';
 import Select from '../../components/Select';
@@ -55,6 +55,7 @@ const Form = ({ onSuccess, onError }) => {
           <Field
             placeholder=""
             label="Nom"
+            name="Nom"
             type={FIELD_TYPES.INPUT_TEXT}
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -62,6 +63,7 @@ const Form = ({ onSuccess, onError }) => {
           <Field
             placeholder=""
             label="Prénom"
+            name="Prenom"
             type={FIELD_TYPES.INPUT_TEXT}
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -69,6 +71,7 @@ const Form = ({ onSuccess, onError }) => {
           <Select
             selection={['Personel', 'Entreprise']}
             label="Personel / Entreprise"
+            name="selected"
             type="large"
             titleEmpty
             value={selectedEvent}
@@ -77,6 +80,7 @@ const Form = ({ onSuccess, onError }) => {
           <Field
             placeholder=""
             label="Email"
+            name="Email"
             type={FIELD_TYPES.INPUT_EMAIL}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -89,6 +93,7 @@ const Form = ({ onSuccess, onError }) => {
           <Field
             placeholder="message"
             label="Message"
+            name="Message"
             type={FIELD_TYPES.TEXTAREA}
             value={postContent}
             onChange={(e) => setPostContent(e.target.value)}
