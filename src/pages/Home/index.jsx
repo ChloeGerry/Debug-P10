@@ -14,6 +14,7 @@ import Loader from '../../components/Loader';
 import { useData } from '../../contexts/DataContext';
 
 const Page = () => {
+  const imagesPath = `${process.env.PUBLIC_URL}`;
   const { data } = useData();
 
   if (!data) {
@@ -39,7 +40,9 @@ const Page = () => {
           <h2 className="Title">Nos services</h2>
           <p>Nous organisons des événements sur mesure partout dans le monde</p>
           <div className="ListContainer">
-            <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
+            <ServiceCard
+              imageSrc={`${imagesPath}/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png`}
+            >
               <h3>Soirée d’entreprise</h3>
               <p>
                 Une soirée d’entreprise vous permet de réunir vos équipes pour
@@ -48,7 +51,7 @@ const Page = () => {
                 vos diners et soirées d’entreprise.
               </p>
             </ServiceCard>
-            <ServiceCard imageSrc="/images/hall-expo.png">
+            <ServiceCard imageSrc={`${imagesPath}/images/hall-expo.png`}>
               <h3>Conférences</h3>
               <p>
                 77 events vous propose d’organiser votre événement, quelle que
@@ -58,7 +61,9 @@ const Page = () => {
                 audience et faire de cet événement un succès.
               </p>
             </ServiceCard>
-            <ServiceCard imageSrc="/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png">
+            <ServiceCard
+              imageSrc={`${imagesPath}/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png`}
+            >
               <h3>Experience digitale</h3>
               <p>
                 Notre agence experte en contenus immersifs offre des services de
@@ -79,32 +84,32 @@ const Page = () => {
           <p>Une équipe d’experts dédiés à l’organisation de vos événements</p>
           <div className="ListContainer">
             <PeopleCard
-              imageSrc="/images/stephanie-liverani-Zz5LQe-VSMY-unsplash.png"
+              imageSrc={`${imagesPath}/images/stephanie-liverani-Zz5LQe-VSMY-unsplash.png`}
               name="Samira"
               position="CEO"
             />
             <PeopleCard
-              imageSrc="/images/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.png"
+              imageSrc={`${imagesPath}/images/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.png`}
               name="Jean-baptiste"
               position="Directeur marketing"
             />
             <PeopleCard
-              imageSrc="/images/christina-wocintechchat-com-SJvDxw0azqw-unsplash.png"
+              imageSrc={`${imagesPath}/images/christina-wocintechchat-com-SJvDxw0azqw-unsplash.png`}
               name="Alice"
               position="CXO"
             />
             <PeopleCard
-              imageSrc="/images/jonas-kakaroto-KIPqvvTOC1s-unsplash.png"
+              imageSrc={`${imagesPath}/images/jonas-kakaroto-KIPqvvTOC1s-unsplash.png`}
               name="Luís"
               position="Animateur"
             />
             <PeopleCard
-              imageSrc="/images/amy-hirschi-b3AYk8HKCl0-unsplash1.png"
+              imageSrc={`${imagesPath}/images/amy-hirschi-b3AYk8HKCl0-unsplash1.png`}
               name="Christine"
               position="VP animation"
             />
             <PeopleCard
-              imageSrc="/images/christina-wocintechchat-com-0Zx1bDv5BNY-unsplash.png"
+              imageSrc={`${imagesPath}/images/christina-wocintechchat-com-0Zx1bDv5BNY-unsplash.png`}
               name="Isabelle"
               position="VP communication"
             />
@@ -140,7 +145,7 @@ const Page = () => {
               {({ setIsOpened }) => (
                 <EventCard
                   onClick={() => setIsOpened(true)}
-                  imageSrc={lastEvent.cover}
+                  imageSrc={`${imagesPath}${lastEvent.cover}`}
                   title={lastEvent.title}
                   description={lastEvent.description}
                   date={new Date(lastEvent.date)}

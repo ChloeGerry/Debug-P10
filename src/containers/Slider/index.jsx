@@ -5,6 +5,7 @@ import { getMonth } from '../../helpers/Date';
 import './style.scss';
 
 const Slider = () => {
+  const imagesPath = `${process.env.PUBLIC_URL}`;
   const { data } = useData();
   const [index, setIndex] = useState(1);
 
@@ -32,7 +33,7 @@ const Slider = () => {
                 index === id ? 'display' : 'hide'
               }`}
             >
-              <img src={cover} alt="forum" />
+              <img src={`${imagesPath}${cover}`} alt="forum" />
               <div className="SlideCard__descriptionContainer">
                 <div className="SlideCard__description">
                   <h3>{title}</h3>

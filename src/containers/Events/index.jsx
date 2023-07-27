@@ -12,6 +12,7 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState('Toutes');
   const [currentPage, setCurrentPage] = useState(1);
+  const imagesPath = `${process.env.PUBLIC_URL}`;
 
   const filteredEvents = ((!type ? data?.events : data?.events) || []).filter(
     (event, index) => {
@@ -67,7 +68,7 @@ const EventList = () => {
               {({ setIsOpened }) => (
                 <EventCard
                   onClick={() => setIsOpened(true)}
-                  imageSrc={event.cover}
+                  imageSrc={`${imagesPath}${event.cover}`}
                   title={event.title}
                   date={new Date(event.date)}
                   label={event.type}
